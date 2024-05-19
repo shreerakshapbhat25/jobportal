@@ -1,0 +1,66 @@
+/* CSS for the chatbot icon container */
+.chatbot-container {
+    position: relative; /* Make the parent container relatively positioned */
+}
+
+/* CSS for the chatbot icon container */
+.chat-icon-container {
+    position: fixed; /* Position the chatbot icon container fixed */
+    bottom: 20px; /* Position the chatbot icon 20px from the bottom of the viewport */
+    right: 20px; /* Position the chatbot icon 20px from the right side of the viewport */
+    z-index: 1000; /* Ensure the chatbot icon appears above other elements */
+}
+
+/* CSS for the chatbot icon */
+.chat-icon {
+    background-color: #a3e9f1; /* Background color for the chatbot icon */
+    border-radius: 50%; /* Make the icon container round */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a shadow effect */
+    padding: 10px; /* Add some padding around the icon */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+/* CSS for the chatbot icon image */
+.chat-icon img {
+    width: 50px; /* Set the width of the chatbot icon image */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Ensure the image is centered */
+    margin: 0 auto; /* Center the image horizontally */
+}
+
+/* CSS for the chatbot modal */
+.modal {
+    display: relative; /* Hide the modal by default */
+    position: relative;
+    z-index: 9999; /* Ensure the modal appears above other elements */
+    right: 20px; /* Position the modal 20px from the right side of the viewport */
+    bottom: 80px; /* Position the modal 80px above the bottom of the viewport */
+    background-color: #3498db; /* Background color for the chatbot modal */
+    color: #fff; /* White text color for the modal content */
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px; /* Increase padding for better spacing */
+    width: 400px; /* Adjust width as needed */
+    height: 500px; /* Adjust height as needed */
+    overflow: hidden; /* Hide any overflowing content */
+}
+
+/* CSS for the modal content (iframe) */
+.modal-content {
+    width: 100%;
+    height: 100%; /* Occupy the full height of the modal container */
+}
+
+/* CSS for the iframe */
+.modal-content iframe {
+    width: 100%;
+    height: 100%; /* Occupy the full height of the modal container */
+    border: none; /* Remove border from iframe */
+}
+
+/* Additional styles for the chat icon tagline */
+.chat-icon p {
+    margin-top: 5px; /* Add some margin to the top of the tagline */
+    font-size: 14px; /* Adjust the font size as needed */
+    text-align: center; /* Center the text horizontally */
+}

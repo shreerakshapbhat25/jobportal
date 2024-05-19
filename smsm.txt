@@ -1,0 +1,63 @@
+Question: Who are you?
+Answer: I am a chatbot designed to assist you.
+
+Question: What are you?
+Answer: I am an AI chatbot.
+
+Question: Tell me about yourself.
+Answer: I am here to help you with your queries.
+
+Question: Hi
+Answer: Hello!
+
+Question: Hello
+Answer: Hi there!
+
+Question: Hey
+Answer: Hey! How can I assist you today?
+
+Question: Hi
+Answer: Hello! How can I help you?
+
+Question: Can you help me with resume parsing?
+Answer: I can help you parse your resume.
+
+Question: Parse my resume
+Answer: Sure, I can parse your resume for you.
+
+Question: Contact us
+Answer: You can reach us at lsrs@gmail.com.
+
+Question: Get a job
+Answer: Explore our job openings on our website.
+
+Question: What can your site do
+Answer: Our site can help you get a job, make a resume for you, get the imporatnt skills in the resume and many more!
+
+Question: Translation is there?
+Answer: Yes Translation is there
+
+Question: I need a job
+Answer: Explore our job openings on our website.
+
+Question: What is the purpose of the website
+Answer: To explore job openings on our website remote and on-site
+
+Question:How do i create a resume
+Answer: On the navigation bar click on resume button, you can get create a resume by providing video or by providing relevant information
+
+Question:Can your website provide the information in different languages?
+Answer: Yes, we provide the translation from english to languages like hindi, kannada
+
+Question: i want to get the important skills in my resume
+Answer: Of course, you can do the same with the help of our resume parser, please click on the resume parse button on the navigation bar and upload your resume in pdf or document format
+
+Question: I need a job
+Answer: Explore our job openings on our website.
+
+Question: Can your website provide me with governmental and non governmental jobs?
+Answer:Yes it will provide all the available jobs.
+
+
+
+
