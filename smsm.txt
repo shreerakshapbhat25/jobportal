@@ -31,7 +31,7 @@ Answer: You can reach us at lsrs@gmail.com.
 Question: Get a job
 Answer: Explore our job openings on our website.
 
-Question: What can your site do
+Question: What can you do
 Answer: Our site can help you get a job, make a resume for you, get the imporatnt skills in the resume and many more!
 
 Question: Translation is there?

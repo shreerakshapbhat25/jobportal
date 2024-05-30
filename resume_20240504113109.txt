@@ -1,0 +1,45 @@
+<b><font size=26>Shreeraksha</font></b>
+
+
+
+
+Email: <a href='mailto:shree@gmail.com'>shree@gmail.com</a>
+Phone: 345678
+Bangalore Karnataka
+<b><font size=18>Summary</font></b>
+
+Hello
+Experience:
+
+<b><font size=14>Plan Source</font></b>
+
+Duration: 4 months
+Work Summary: 4 months
+<b><font size=14>Nokia</font></b>
+
+Duration: 11
+Work Summary: 11
+Education:
+
+<b><font size=14>NHCE</font></b>
+
+Degree: BE
+Field of Study: ISE
+Duration: 4 years
+<b><font size=14>Deeksa</font></b>
+
+Degree: PU
+Field of Study: PCMB
+Duration: 2
+Skills:
+
+- Java
+- C
+- C++
+- Python
+Certifications:
+
+<b><font size=14>Cloud Computing</font></b>
+
+Platform: IIT
+Subject: Cloud

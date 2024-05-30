@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Listings</title>
+    <style>
+        /* Add your CSS styles here */
+        .job {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Job Listings</h1>
+
+    <div id="results"></div>
+
+    <script>
+        // Retrieve job data from URL parameter
+        var urlParams = new URLSearchParams(window.location.search);
+        var jobData = urlParams.get('data');
+        
+        // Parse job data and display job listings
+        var jobs = JSON.parse(decodeURIComponent(jobData));
+        var resultsContainer = document.getElementById('results');
+        jobs.forEach(function(job) {
+            var jobElement = document.createElement('div');
+            jobElement.classList.add('job');
+            jobElement.innerHTML = `
+                <h3>${job['Job Title']}</h3>
+                <p><strong>Company:</strong> ${job['Company Name']}</p>
+                <p><strong>Location:</strong> ${job['Location']}</p>
+                <p><strong>Salary:</strong> ${job['Salary']}</p>
+                <p><a href="${job['URL']}" target="_blank">View Job</a></p>
+            `;
+            resultsContainer.appendChild(jobElement);
+        });
+    </script>
+</body>
+</html>

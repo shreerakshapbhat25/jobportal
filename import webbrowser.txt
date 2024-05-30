@@ -1,0 +1,44 @@
+import webbrowser
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+from linkedin import linkedin
+
+def generate_pdf_resume(profile):
+    name = profile['firstName'] + ' ' + profile['lastName']
+    email = profile.get('emailAddress', 'Not Provided')
+    headline = profile.get('headline', 'No Headline')
+    summary = profile.get('summary', 'No Summary')
+    location = profile.get('location', {'name': 'Unknown Location'})['name']
+    # Add more fields as needed
+
+    content = f"Name: {name}\n"
+    content += f"Email: {email}\n"
+    content += f"Headline: {headline}\n"
+    content += f"Location: {location}\n"
+    content += f"Summary: {summary}\n"
+    # Add more fields as needed
+
+    pdf_file = 'resume.pdf'
+    c = canvas.Canvas(pdf_file, pagesize=letter)
+    c.setFont("Helvetica", 12)
+    textobject = c.beginText(50, 750)
+    textobject.textLines(content)
+    c.drawText(textobject)
+    c.save()
+
+    return pdf_file
+
+def main():
+    API_KEY = 'your_api_key'
+    API_SECRET = 'your_api_secret'
+    RETURN_URL = 'http://localhost:8000'
+    authentication = linkedin.LinkedInAuthentication(API_KEY, API_SECRET, RETURN_URL, linkedin.PERMISSIONS.enums.values())
+    application = linkedin.LinkedInApplication(authentication)
+    profile = application.get_profile()
+    pdf_file = generate_pdf_resume(profile)
+    print(f"PDF generated: {pdf_file}")
+    return pdf_file
+
+if __name__ == "__main__":
+    pdf_file = main()
+    webbrowser.open_new(pdf_file)

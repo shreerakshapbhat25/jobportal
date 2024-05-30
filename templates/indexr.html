@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Resume Builder</title>
+</head>
+<body>
+    <h1>Resume Builder</h1>
+    <form action="/" method="post">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br>
+        <label for="phone">Phone:</label><br>
+        <input type="text" id="phone" name="phone" required><br>
+        <label for="address">Address:</label><br>
+        <input type="text" id="address" name="address" required><br>
+        <label for="summary">Summary:</label><br>
+        <textarea id="summary" name="summary" rows="4" cols="50"></textarea><br>
+            <!-- Add other input fields for phone, address, summary -->
+
+        <!-- Experience -->
+        <label>Experience:</label><br>
+        <div id="experience_fields">
+            <div class="experience">
+                <input type="text" name="experience_job_title" placeholder="Job Title">
+                <input type="text" name="experience_duration" placeholder="Duration">
+                <input type="text" name="experience_work_summary" placeholder="Work Summary">
+            </div>
+        </div>
+        <button type="button" onclick="addExperience()">Add Experience</button><br>
+        <button type="button" onclick="removeLastExperience()">Remove Fields</button><br>
+
+        <!-- Education -->
+        <label>Education:</label><br>
+        <div id="education_fields">
+            <div class="education">
+                <input type="text" name="education_institution" placeholder="Institution">
+                <input type="text" name="education_degree" placeholder="Degree">
+                <input type="text" name="education_field" placeholder="Field of Study">
+                <input type="text" name="education_duration" placeholder="Duration">
+            </div>
+        </div>
+        <button type="button" onclick="addEducation()">Add Education</button><br>
+        <button type="button" onclick="removeLastEducation()">Remove Fields</button><br>
+
+        <!-- Certifications -->
+        <label>Certifications:</label><br>
+        <div id="certification_fields">
+            <div class="certification">
+                <input type="text" name="certification_name" placeholder="Certification Name">
+                <input type="text" name="certification_source" placeholder="From Where">
+                <input type="text" name="certification_field" placeholder="Field of Study">
+            </div>
+        </div>
+        <button type="button" onclick="addCertification()">Add Certification</button><br>
+        <button type="button" onclick="removeLastCertification()">Remove Fields</button><br>
+
+        <!-- Skills -->
+        <label>Skills:</label><br>
+        <div id="skills_container">
+            <input type="text" name="skills[]" placeholder="Skill 1"><br>
+            <input type="text" name="skills[]" placeholder="Skill 2"><br>
+            <input type="text" name="skills[]" placeholder="Skill 3">
+        </div>
+        <button type="button" onclick="addSkill()">Add Skill</button><br>
+        <input type="submit" value="Generate Resume">
+    </form>
+
+    {% if resume_file %}
+        <br>
+        <a href="{{ resume_file }}" download>Download Resume</a>
+    {% endif %}
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

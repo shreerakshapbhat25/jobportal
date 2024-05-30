@@ -1,64 +1,66 @@
-from flask import Flask, render_template, request
-import requests
-from bs4 import BeautifulSoup
-import pandas as pd
+import os
+import subprocess
+import json
+import logging
+import sys
+
+from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
 
-def scrape_job_listings(location, keyword, job_type):
-    # Initialize an empty list to store job URLs
-    job_urls = []
+# Set up logging
+logging.basicConfig(level=logging.DEBUG)
 
-    # Replace this URL with the actual job listing website you want to scrape
-    base_url = "https://www.naukri.com"
-
-    # Make a request to the job listing website
-    response = requests.get(base_url)
-
-    # Check if the request was successful
-    if response.status_code == 200:
-        # Parse the HTML content of the page
-        soup = BeautifulSoup(response.content, "html.parser")
-
-        # Find job listings based on the input keyword
-        # You need to inspect the HTML structure of the job listing website to find the appropriate selectors
-        job_elements = soup.find_all("div", class_="job")
-
-        for job_element in job_elements:
-            # Example logic to extract job URLs containing the keyword and matching job type
-            job_title = job_element.find("h2").text
-            job_url = job_element.find("a")["href"]
-            job_category = job_element.find("span", class_="category").text
-
-            if keyword.lower() in job_title.lower() and job_type.lower() in job_category.lower():
-                job_urls.append(job_url)
-
-    return job_urls
-
-def create_excel(location, keyword, job_type):
-    job_urls = scrape_job_listings(location, keyword, job_type)
-
-    # Create a DataFrame to store the scraped job URLs
-    df = pd.DataFrame({"Job URLs": job_urls})
-
-    # Write the DataFrame to an Excel file
-    excel_filename = "job_listings.xlsx"
-    df.to_excel(excel_filename, index=False)
-
-    return excel_filename
-
-@app.route("/")
+@app.route('/')
 def index():
-    return render_template("index.html")
+    return render_template('job-search.html')
 
-@app.route("/search", methods=["POST"])
-def search():
-    location = request.form["location"]
-    keyword = request.form["keyword"]
-    job_type = request.form["job_type"]
+@app.route('/submit', methods=['POST'])
+def submit():
+    data = request.json
+    job_role = data['job_role']
+    location = data['location']
+    
+    # Log the received data
+    app.logger.debug(f'Received job role: {job_role}, location: {location}')
+    
+    # Specify the path to the glassdoor.py script
+    glassdoor_script = r"D:\majorproject\drive-download-20240514T173802Z-001\glassdoor.py"
+    
+    python_executable = sys.executable  # This will get the path to the current Python executable
+    
+    # Log the paths being used
+    app.logger.debug(f'Glassdoor script path: {glassdoor_script}')
+    app.logger.debug(f'Using Python executable: {python_executable}')
+    
+    # Run the glassdoor.py script with the job role and location
+    result = subprocess.run([python_executable, glassdoor_script, job_role, location], capture_output=True, text=True)
+    
+    # Log the result of the subprocess
+    app.logger.debug(f'Subprocess returned code: {result.returncode}')
+    app.logger.debug(f'Subprocess stdout: {result.stdout}')
+    app.logger.debug(f'Subprocess stderr: {result.stderr}')
+    
+    if result.returncode == 0:
+    # Remove the first three lines from result.stdout
+        lines = result.stdout.split('\n')[3:]
+        filtered_stdout = '\n'.join(lines)
+    
+    # Log the filtered stdout
+    app.logger.debug(f'Filtered subprocess output: {filtered_stdout}')
+    
+    if filtered_stdout:
+        try:
+            jobs = json.loads(filtered_stdout)
+            app.logger.debug(f'Jobs data: {jobs}')
+            return jsonify(success=True, jobs=jobs)
+        except json.JSONDecodeError as e:
+            app.logger.error(f'Error decoding JSON: {e}')
+            return jsonify(success=False, error='Error decoding JSON')
+    else:
+        app.logger.warning('Subprocess output is empty')
+        return jsonify(success=False, error='Subprocess output is empty')
 
-    excel_file = create_excel(location, keyword, job_type)
-    return f"Excel file '{excel_file}' created successfully with scraped job listings."
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(debug=True)
